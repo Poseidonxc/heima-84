@@ -4,4 +4,5 @@ import axios from 'axios'
 // 1.基准地址
 axios.defaults.baseURL = 'http://ttapi.research.itcast.cn/mp/v1_0/'
 // 更多配置
+// 导出
 export default axios
