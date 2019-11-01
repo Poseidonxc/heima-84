@@ -121,7 +121,7 @@ export default {
         per_page: 20
       },
       // 日期数组
-      ChannelOptions: [],
+      channelOptions: [],
       dateArr: [],
       // 文章列表
       articles: [],
@@ -188,7 +188,7 @@ export default {
     },
     // 删除
     async del (id) {
-      await this.$http.deleta(`articles/${id}`)
+      await this.$http.delete(`articles/${id}`)
       // 提示下
       this.$message.success('删除成功!')
       this.getArticles()
