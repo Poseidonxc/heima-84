@@ -23,8 +23,8 @@
     </el-card>
   </div>
 </template>
-
 <script>
+import local from '@/utils/local'
 export default {
   data () {
     // 定义一个校验手机号的函数
@@ -38,8 +38,8 @@ export default {
     }
     return {
       loginForm: {
-        mobile: '',
-        code: ''
+        mobile: '13131313131',
+        code: '246810'
       },
       // 校验规则
       loginRules: {
@@ -64,20 +64,40 @@ export default {
     }
   },
   methods: {
+    // login () {
+    //   // 获取表单的实例
+    //   this.$refs['loginForm'].validate(valid => {
+    //     if (valid) {
+    //       // this.$http
+    //       //   .post('authorizations', this.loginForm)
+    //       //   .then(res => {
+    //       //     // 请求成功
+    //       //     // 保存用户信息
+    //       //     local.setUser(res.data.data)
+    //       //     this.$router.push('/')
+    //       //   })
+    //       //   .catch(() => {
+    //       //     // 请求失败
+    //       //     this.$message.error('手机号或验证码错误')
+    //       //   })
+    //       const res =awa
+    //     }
+    //   })
+    // }
     login () {
-      // 获取表单的实例
-      this.$refs['loginForm'].validate(valid => {
+      // 获取表单组件实例 ---> 调用校验函数
+      this.$refs['loginForm'].validate(async valid => {
         if (valid) {
-          this.$http
-            .post('authorizations', this.loginForm)
-            .then(res => {
-              // 请求成功
-              this.$router.push('/')
-            })
-            .catch(() => {
-              // 请求失败
-              this.$message.error('手机号或验证码错误')
-            })
+          // 当一段代码不能保证一定没有报错  try {} catch (e) {} 捕获异常处理异常
+          try {
+            const {
+              data: { data }
+            } = await this.$http.post('authorizations', this.loginForm)
+            local.setUser(data)
+            this.$router.push('/')
+          } catch (e) {
+            this.$message.error('手机号或验证码错误')
+          }
         }
       })
     }
