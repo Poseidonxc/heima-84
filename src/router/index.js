@@ -6,6 +6,7 @@ import Welcome from '@/views/welcome'
 import NotFount from '@/views/404'
 import local from '@/utils/local'
 import Article from '@/views/article'
+import Image from '@/views/image'
 Vue.use(VueRouter)
 const router = new VueRouter(
   {
@@ -20,7 +21,10 @@ const router = new VueRouter(
         children: [
           // 欢迎页面
           { path: '/', component: Welcome },
-          { path: '/article', component: Article }
+          // 内容管理
+          { path: '/article', component: Article },
+          // 素材管理
+          { path: '/image', component: Image }
         ]
       },
       { path: '*', component: NotFount }
