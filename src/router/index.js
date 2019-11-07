@@ -7,6 +7,9 @@ import NotFount from '@/views/404'
 import local from '@/utils/local'
 import Article from '@/views/article'
 import Image from '@/views/image'
+import Publish from '@/views/publish'
+import Comment from '@/views/comment'
+import Setting from '@/views/setting'
 Vue.use(VueRouter)
 const router = new VueRouter(
   {
@@ -24,7 +27,13 @@ const router = new VueRouter(
           // 内容管理
           { path: '/article', component: Article },
           // 素材管理
-          { path: '/image', component: Image }
+          { path: '/image', component: Image },
+          // 发布文章
+          { path: '/publish', component: Publish },
+          // 评论管理
+          { path: '/comment', component: Comment },
+          // 设置
+          { path: '/setting', component: Setting }
         ]
       },
       { path: '*', component: NotFount }

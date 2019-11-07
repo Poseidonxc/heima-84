@@ -89,6 +89,7 @@ export default {
       this.dialogVisible = true
       this.imageUrl = null
     },
+    // 获取素材列表数据
     async getImages () {
       const {
         data: { data }

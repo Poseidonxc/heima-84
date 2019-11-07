@@ -14,7 +14,7 @@
         router
       >
         <el-menu
-          default-active="/"
+          :default-active="$route.path"
           background-color="#002033"
           text-color="#fff"
           active-text-color="#ffd04b"
@@ -84,6 +84,7 @@
 </template>
 <script>
 import local from '@/utils/local'
+import eventBus from '@/eventBus'
 // - 用户的信息存储本地
 //   - 获取 local.getUser()
 // - 申明数据
@@ -92,7 +93,11 @@ export default {
   data () {
     return {
       isOpen: true,
-      userInfo: {}
+      // 如果想要响应式的数据建议先声明
+      userInfo: {
+        name: '',
+        photo: ''
+      }
     }
   },
   created () {
@@ -100,6 +105,14 @@ export default {
     const user = local.getUser() || {}
     this.userInfo.name = user.name
     this.userInfo.photo = user.photo
+    // 绑定事件去接受咱们修改name后的设置(记得导入eventBus)
+    eventBus.$on('updataName', (name) => {
+      this.userInfo.name = name
+    })
+    // 绑定事件去接受咱们修改photo后的设置(记得导入eventBus)
+    eventBus.$on('updataPhoto', (photo) => {
+      this.userInfo.photo = photo
+    })
   },
   methods: {
     toggleMenu () {
